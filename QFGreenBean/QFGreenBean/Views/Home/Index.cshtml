@@ -3,8 +3,13 @@
 }
 
 <p>
-    <h2>Student Program Planner</h2>
+    <h2>Student Scheduler</h2>
 </p>
+
+<p> The Student Scheduler is used to generate recommended schedules on coming year and subsequent years until graduation.</p>
+<p> The recommended schedules can then be automatically readjust to meet specific needs of a student.</p>
+<p>  &nbsp;</p>
+
 <p>
     <table style="width:100%;">
         <tr>
@@ -16,13 +21,17 @@
         <tr>
             <td class="auto-style1">Term</td>
             <td>
-                <input id="Text2" type="text" />
+                <select name="terms">
+                    <option value="Fall2015">Fall 2015</option>
+                    <option value="Winter2016">Winter 2016</option>
+                    <option value="Summer2016">Summer 2016</option>
+                </select>
             </td>
         </tr>
         <tr>
             <td class="auto-style1">&nbsp;</td>
             <td>
-                <input id="Submit1" type="submit" value="Generate Course Sequence" />
+                <input id="Submit1" type="submit" value="Generate Schedule" />
             </td>
         </tr>
     </table>
