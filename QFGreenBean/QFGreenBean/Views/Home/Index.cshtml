@@ -1,4 +1,6 @@
-﻿@{
+﻿@model QFGreenBean.Models.StudentScheduleGenerator
+
+@{
     ViewBag.Title = "Green Bean";
 }
 
@@ -6,45 +8,63 @@
     <h2>Student Scheduler</h2>
 </p>
 
-<p> The Student Scheduler is used to generate recommended schedules on coming year and subsequent years until graduation.</p>
-<p> The recommended schedules can then be automatically readjust to meet specific needs of a student.</p>
-<p>  &nbsp;</p>
+<p>Student Scheduler is a tool to generate recommended student schedules in the coming year and subsequent years until graduation.</p>
+<p>The student schedules can be readjusted automatically to meet specific needs of a student.</p>
+<p>&nbsp;</p>
 
-<p>
+@using (Html.BeginForm())
+{
     <table style="width:100%;">
         <tr>
             <td class="auto-style1">Student Number</td>
             <td>
-                <input id="Text1" type="text" />
+                @Html.TextBoxFor(x => x.StudentNumber)
             </td>
         </tr>
         <tr>
             <td class="auto-style1">Term</td>
             <td>
-                <select name="terms">
-                    <option value="Fall2015">Fall 2015</option>
-                    <option value="Winter2016">Winter 2016</option>
-                    <option value="Summer2016">Summer 2016</option>
-                </select>
+                @Html.DropDownListFor(x => x.StartingSemester,
+                                           new[] {new SelectListItem() { Text = "Fall 2015", Value = "Fall2015" },
+                                                  new SelectListItem() { Text = "Winter 2016", Value = "Winter2016" },
+                                                  new SelectListItem() { Text = "Summer 2016", Value = "Summer2016" }
+                                                 } )
             </td>
         </tr>
+
+        <tr>
+            <td class="auto-style1">Department</td>
+            <td>
+                @Html.TextBoxFor(x => x.Department)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="auto-style1">Program Option</td>
+            <td>
+                @Html.TextBoxFor(x => x.ProgramOption)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="auto-style1">Include a summer session</td>
+            <td>
+                <input type="checkbox" />
+            </td>
+        </tr>
+
         <tr>
             <td class="auto-style1">&nbsp;</td>
             <td>
-                <input id="Submit1" type="submit" value="Generate Schedules" />
+                <input type="submit" value="Generate Schedules" />
             </td>
         </tr>
     </table>
-</p>
+}
 
 <p>  &nbsp;</p>
 <p>  &nbsp;</p>
 <p>  &nbsp;</p>
 <p>  &nbsp;</p>
-<p>  &nbsp;</p>
-<p>  &nbsp;</p>
-<p>  &nbsp;</p>
-<p>  &nbsp;</p>
-
 <p>* Note that the application is currently under development.</p>
 
