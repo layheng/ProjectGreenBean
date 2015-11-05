@@ -9,12 +9,18 @@ namespace QFGreenBean.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
-            StudentScheduleGenerator generator = new StudentScheduleGenerator();
-
-            return View(generator);
+            return View();
         }
+
+        [HttpPost]
+        public ActionResult Index(StudentScheduleGenerator generator)
+        {
+            return View("DisplayCurrentYearSchedules", generator);
+        }
+
 
         public ActionResult About()
         {
