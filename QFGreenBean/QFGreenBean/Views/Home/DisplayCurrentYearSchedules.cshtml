@@ -1,0 +1,33 @@
+﻿@model QFGreenBean.Models.StudentScheduleGenerator
+
+@{
+    ViewBag.Title = "Green Bean";
+}
+
+<p>
+    <h2>Student Schedules</h2>
+</p>
+
+<p><h3>Student Number: @Model.StudentNumber</h3></P>   
+ 
+<p><h3>@Model.StartingSemester</h3></p>
+<p>(...Weekly calendar view - under development...)</p>
+
+@if (@Model.StartingSemester == "Fall 2015")
+{
+    <p><h3>Winter 2016</h3></p>
+    <p>(...Weekly calendar view - under development...)</p>
+}
+
+@if ( (@Model.StartingSemester != "Summer 2016") && (@Model.IncludeSummer) )
+{
+    <p><h3>Summer 2016</h3></p>
+    <p>(...Weekly calendar view - under development...)</p>
+}
+
+
+
+<p>  &nbsp;</p>
+<p>  &nbsp;</p>
+<p>  &nbsp;</p>
+<p>  &nbsp;</p>
