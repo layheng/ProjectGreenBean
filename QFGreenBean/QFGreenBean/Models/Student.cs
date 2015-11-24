@@ -21,5 +21,13 @@ namespace QFGreenBean.Models
         public string Telephone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
+
+        public bool IsStudentEnrolled(int studentId)
+        {
+
+            // TO DO
+            return true;
+        }
+
     }
 }
