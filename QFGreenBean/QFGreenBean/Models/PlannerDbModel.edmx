@@ -73,10 +73,18 @@
           <Property Name="CourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="Number" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Name  " Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Term" Type="varchar" MaxLength="5" />
-          <Property Name="Section" Type="varchar" MaxLength="5" />
+          <Property Name="Prerequisite" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -87,6 +95,21 @@
           <Property Name="PostDate" Type="smalldatetime" />
           <Property Name="Subject" Type="varchar" MaxLength="100" />
           <Property Name="Comments" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="SectionId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Units" Type="int" />
+          <Property Name="Day" Type="varchar" MaxLength="20" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
+          <Property Name="Room" Type="varchar" MaxLength="20" />
+          <Property Name="Instructor" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="CourseId" Type="int" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -100,6 +123,18 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="varchar" MaxLength="100" />
         </EntityType>
+        <Association Name="FK_Course_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -164,8 +199,14 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Course_Department" Association="Self.FK_Course_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -246,18 +287,6 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="Course">
-          <Key>
-            <PropertyRef Name="CourseId" />
-          </Key>
-          <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Number" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Term" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="Section" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="StudentId" />
@@ -308,7 +337,6 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Courses" EntityType="Self.Course" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -323,6 +351,13 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="Feedbacks" EntityType="PlannerDbModel.Feedback" />
+          <EntitySet Name="Departments" EntityType="PlannerDbModel.Department" />
+          <EntitySet Name="Sections" EntityType="PlannerDbModel.Section" />
+          <EntitySet Name="Courses" EntityType="PlannerDbModel.Course" />
+          <AssociationSet Name="FK_Course_Department" Association="PlannerDbModel.FK_Course_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Feedback">
           <Key>
@@ -334,6 +369,55 @@
           <Property Name="Subject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Courses" Relationship="PlannerDbModel.FK_Course_Department" FromRole="Department" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="SectionId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Units" Type="Int32" />
+          <Property Name="Day" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="Room" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Instructor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CourseId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Term" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Prerequisite" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="PlannerDbModel.FK_Course_Department" FromRole="Course" ToRole="Department" />
+        </EntityType>
+        <Association Name="FK_Course_Department">
+          <End Type="PlannerDbModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="PlannerDbModel.Course" Role="Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -395,19 +479,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="PlannerDbModel.Course">
-              <MappingFragment StoreEntitySet="Course">
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Name" ColumnName="Name  " />
-                <ScalarProperty Name="Term" ColumnName="Term" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="PlannerDbModel.Student">
               <MappingFragment StoreEntitySet="Student">
@@ -437,6 +508,44 @@
                 <ScalarProperty Name="PostDate" ColumnName="PostDate" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="PlannerDbModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="PlannerDbModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Instructor" ColumnName="Instructor" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="PlannerDbModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Prerequisite" ColumnName="Prerequisite" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

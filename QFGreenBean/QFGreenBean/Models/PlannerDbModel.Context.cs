@@ -30,8 +30,10 @@ namespace QFGreenBean.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Section> Sections { get; set; }
+        public virtual DbSet<Course> Courses { get; set; }
     }
 }

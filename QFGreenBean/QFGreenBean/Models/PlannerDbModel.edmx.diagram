@@ -5,17 +5,37 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="871732d18ba3487caf1469bafb5a3d27" Name="Diagram1">
-        <EntityTypeShape EntityType="PlannerDbModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlannerDbModel.C__MigrationHistory" Width="1.5" PointX="0.625" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="PlannerDbModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PlannerDbModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="PlannerDbModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PlannerDbModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PlannerDbModel.Course" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PlannerDbModel.Student" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PlannerDbModel.Student" Width="1.5" PointX="7.375" PointY="5.75" IsExpanded="true" />
         <AssociationConnector Association="PlannerDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="PlannerDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="PlannerDbModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PlannerDbModel.Feedback" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.MSreplication_options" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.spt_fallback_db" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.spt_fallback_dev" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.spt_fallback_usg" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.spt_monitor" Width="1.5" PointX="9.75" PointY="8.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.spt_values" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.C__MigrationHistory1" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.AspNetRole1" Width="1.5" PointX="12.75" PointY="2.5" />
+        <EntityTypeShape EntityType="PlannerDbModel.AspNetUserClaim1" Width="1.5" PointX="17.25" PointY="1" />
+        <EntityTypeShape EntityType="PlannerDbModel.AspNetUserLogin1" Width="1.5" PointX="17.25" PointY="3.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.AspNetUser1" Width="1.5" PointX="15" PointY="1.375" />
+        <EntityTypeShape EntityType="PlannerDbModel.Course1" Width="1.5" PointX="6" PointY="11" />
+        <EntityTypeShape EntityType="PlannerDbModel.Department" Width="1.5" PointX="1.5" PointY="8.625" />
+        <EntityTypeShape EntityType="PlannerDbModel.Feedback1" Width="1.5" PointX="8.75" PointY="12.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.Section" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.Student1" Width="1.5" PointX="0.75" PointY="13.75" />
+        <AssociationConnector Association="PlannerDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId1" />
+        <AssociationConnector Association="PlannerDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId1" />
+        <AssociationConnector Association="PlannerDbModel.AspNetUserRoles1" />
+        <EntityTypeShape EntityType="PlannerDbModel.Course" Width="1.5" PointX="4.75" PointY="7.75" />
+        <AssociationConnector Association="PlannerDbModel.FK_Course_Department" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -24,10 +24,13 @@
             @Html.DisplayNameFor(model => model.Term)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Section)
+            @Html.DisplayNameFor(model => model.Prerequisite)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department.Name)
         </th>
         <th></th>
     </tr>
@@ -47,10 +50,13 @@
             @Html.DisplayFor(modelItem => item.Term)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Section)
+            @Html.DisplayFor(modelItem => item.Prerequisite)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CourseId }) |

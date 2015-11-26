@@ -17,7 +17,8 @@ namespace QFGreenBean.Controllers
         // GET: Course
         public ActionResult Index()
         {
-            return View(db.Courses.ToList());
+            var courses = db.Courses.Include(c => c.Department);
+            return View(courses.ToList());
         }
 
         // GET: Course/Details/5
@@ -38,6 +39,7 @@ namespace QFGreenBean.Controllers
         // GET: Course/Create
         public ActionResult Create()
         {
+            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "Name");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace QFGreenBean.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CourseId,Code,Number,Name,Term,Section,Description")] Course course)
+        public ActionResult Create([Bind(Include = "CourseId,Code,Number,Name,Term,Prerequisite,Description,DepartmentId")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace QFGreenBean.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "Name", course.DepartmentId);
             return View(course);
         }
 
@@ -70,6 +73,7 @@ namespace QFGreenBean.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "Name", course.DepartmentId);
             return View(course);
         }
 
@@ -78,7 +82,7 @@ namespace QFGreenBean.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CourseId,Code,Number,Name,Term,Section,Description")] Course course)
+        public ActionResult Edit([Bind(Include = "CourseId,Code,Number,Name,Term,Prerequisite,Description,DepartmentId")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace QFGreenBean.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "Name", course.DepartmentId);
             return View(course);
         }
 

@@ -200,6 +200,9 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Department.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Feedback.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
@@ -219,6 +222,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PlannerDbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Section.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
@@ -309,17 +315,17 @@
     <Content Include="Views\Student\Details.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
-    <Content Include="Views\Course\Create.cshtml" />
-    <Content Include="Views\Course\Delete.cshtml" />
-    <Content Include="Views\Course\Details.cshtml" />
-    <Content Include="Views\Course\Edit.cshtml" />
-    <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Feedback\Create.cshtml" />
     <Content Include="Views\Feedback\Delete.cshtml" />
     <Content Include="Views\Feedback\Details.cshtml" />
     <Content Include="Views\Feedback\Edit.cshtml" />
     <Content Include="Views\Feedback\Index.cshtml" />
     <Content Include="Views\Home\DisplayCurrentYearSchedules.cshtml" />
+    <Content Include="Views\Course\Create.cshtml" />
+    <Content Include="Views\Course\Delete.cshtml" />
+    <Content Include="Views\Course\Details.cshtml" />
+    <Content Include="Views\Course\Edit.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

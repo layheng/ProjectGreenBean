@@ -19,8 +19,12 @@ namespace QFGreenBean.Models
         public string Number { get; set; }
         public string Name { get; set; }
         public string Term { get; set; }
-        public string Section { get; set; }
+        public string Prerequisite { get; set; }
         public string Description { get; set; }
+        public int DepartmentId { get; set; }
+    
+        public virtual Department Department { get; set; }
+
 
         public int DeleteCourse(int courseID)
         {
