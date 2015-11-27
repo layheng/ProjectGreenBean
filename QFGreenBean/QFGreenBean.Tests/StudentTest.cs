@@ -10,9 +10,9 @@ namespace QFGreenBean.Tests
         [TestMethod]
         public void TestIsStudentEnrolled()
         {
-            Student student = new Student();
+            // Student student = new Student();
 
-            Assert.IsTrue(student.IsStudentEnrolled(12345));
+            Assert.IsTrue(false); // student.IsStudentEnrolled(12345));
         }
     }
 }
