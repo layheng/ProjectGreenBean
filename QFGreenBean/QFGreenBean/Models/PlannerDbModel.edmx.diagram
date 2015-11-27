@@ -29,13 +29,17 @@
         <EntityTypeShape EntityType="PlannerDbModel.Course1" Width="1.5" PointX="6" PointY="11" />
         <EntityTypeShape EntityType="PlannerDbModel.Department" Width="1.5" PointX="1.5" PointY="8.625" />
         <EntityTypeShape EntityType="PlannerDbModel.Feedback1" Width="1.5" PointX="8.75" PointY="12.75" />
-        <EntityTypeShape EntityType="PlannerDbModel.Section" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.Section" Width="1.5" PointX="7.625" PointY="8.875" />
         <EntityTypeShape EntityType="PlannerDbModel.Student1" Width="1.5" PointX="0.75" PointY="13.75" />
         <AssociationConnector Association="PlannerDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId1" />
         <AssociationConnector Association="PlannerDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId1" />
         <AssociationConnector Association="PlannerDbModel.AspNetUserRoles1" />
         <EntityTypeShape EntityType="PlannerDbModel.Course" Width="1.5" PointX="4.75" PointY="7.75" />
         <AssociationConnector Association="PlannerDbModel.FK_Course_Department" />
+        <AssociationConnector Association="PlannerDbModel.FK_Section_Course" />
+        <EntityTypeShape EntityType="PlannerDbModel.StudentRecord" Width="1.5" PointX="9.625" PointY="6.25" />
+        <AssociationConnector Association="PlannerDbModel.FK_Section_Course" />
+        <AssociationConnector Association="PlannerDbModel.FK_StudentRecord_Student" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -123,6 +123,13 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="StudentRecord">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Name="RecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" />
+        </EntityType>
         <Association Name="FK_Course_Department">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
           <End Role="Course" Type="Self.Course" Multiplicity="*" />
@@ -191,6 +198,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Section_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentRecord_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentRecord" Type="Self.StudentRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentRecord">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PlannerDbModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -203,6 +234,7 @@
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentRecord" EntityType="Self.StudentRecord" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Course_Department" Association="Self.FK_Course_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="Course" EntitySet="Course" />
@@ -222,6 +254,14 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Section_Course" Association="Self.FK_Section_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentRecord_Student" Association="Self.FK_StudentRecord_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentRecord" EntitySet="StudentRecord" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -298,6 +338,7 @@
           <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StudentRecords" Relationship="PlannerDbModel.FK_StudentRecord_Student" FromRole="Student" ToRole="StudentRecord" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -358,6 +399,15 @@
             <End Role="Department" EntitySet="Departments" />
             <End Role="Course" EntitySet="Courses" />
           </AssociationSet>
+          <EntitySet Name="StudentRecords" EntityType="PlannerDbModel.StudentRecord" />
+          <AssociationSet Name="FK_Section_Course" Association="PlannerDbModel.FK_Section_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentRecord_Student" Association="PlannerDbModel.FK_StudentRecord_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentRecord" EntitySet="StudentRecords" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Feedback">
           <Key>
@@ -391,6 +441,7 @@
           <Property Name="Instructor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CourseId" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="PlannerDbModel.FK_Section_Course" FromRole="Section" ToRole="Course" />
         </EntityType>
         <EntityType Name="Course">
           <Key>
@@ -405,6 +456,7 @@
           <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="PlannerDbModel.FK_Course_Department" FromRole="Course" ToRole="Department" />
+          <NavigationProperty Name="Sections" Relationship="PlannerDbModel.FK_Section_Course" FromRole="Course" ToRole="Section" />
         </EntityType>
         <Association Name="FK_Course_Department">
           <End Type="PlannerDbModel.Department" Role="Department" Multiplicity="1" />
@@ -415,6 +467,38 @@
             </Principal>
             <Dependent Role="Course">
               <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudentRecord">
+          <Key>
+            <PropertyRef Name="RecordId" />
+          </Key>
+          <Property Name="RecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="PlannerDbModel.FK_StudentRecord_Student" FromRole="StudentRecord" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_Section_Course">
+          <End Type="PlannerDbModel.Course" Role="Course" Multiplicity="0..1" />
+          <End Type="PlannerDbModel.Section" Role="Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentRecord_Student">
+          <End Type="PlannerDbModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="PlannerDbModel.StudentRecord" Role="StudentRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentRecord">
+              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -546,6 +630,14 @@
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentRecords">
+            <EntityTypeMapping TypeName="PlannerDbModel.StudentRecord">
+              <MappingFragment StoreEntitySet="StudentRecord">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

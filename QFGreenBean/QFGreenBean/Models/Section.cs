@@ -24,5 +24,7 @@ namespace QFGreenBean.Models
         public string Instructor { get; set; }
         public string Status { get; set; }
         public Nullable<int> CourseId { get; set; }
+    
+        public virtual Course Course { get; set; }
     }
 }
