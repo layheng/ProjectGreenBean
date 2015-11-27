@@ -177,6 +177,7 @@
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -227,6 +228,9 @@
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StudentRecord.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentScheduleGenerator.cs" />
@@ -326,6 +330,11 @@
     <Content Include="Views\Course\Details.cshtml" />
     <Content Include="Views\Course\Edit.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Section\Create.cshtml" />
+    <Content Include="Views\Section\Delete.cshtml" />
+    <Content Include="Views\Section\Details.cshtml" />
+    <Content Include="Views\Section\Edit.cshtml" />
+    <Content Include="Views\Section\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
