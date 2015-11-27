@@ -37,6 +37,5 @@ namespace QFGreenBean.Models
             // TO DO
             return true;
         }
-
     }
 }

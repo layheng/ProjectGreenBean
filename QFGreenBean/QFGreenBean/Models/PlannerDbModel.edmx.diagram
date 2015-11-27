@@ -38,8 +38,10 @@
         <AssociationConnector Association="PlannerDbModel.FK_Course_Department" />
         <AssociationConnector Association="PlannerDbModel.FK_Section_Course" />
         <EntityTypeShape EntityType="PlannerDbModel.StudentRecord" Width="1.5" PointX="9.625" PointY="6.25" />
-        <AssociationConnector Association="PlannerDbModel.FK_Section_Course" />
         <AssociationConnector Association="PlannerDbModel.FK_StudentRecord_Student" />
+        <EntityTypeShape EntityType="PlannerDbModel.IsEnrolledIn" Width="1.5" PointX="11.875" PointY="8.25" />
+        <AssociationConnector Association="PlannerDbModel.FK_IsEnrolledIn_Section" />
+        <AssociationConnector Association="PlannerDbModel.FK_IsEnrolledIn_StudentRecord" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

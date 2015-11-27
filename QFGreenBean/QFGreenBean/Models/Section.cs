@@ -14,6 +14,12 @@ namespace QFGreenBean.Models
     
     public partial class Section
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Section()
+        {
+            this.IsEnrolledIns = new HashSet<IsEnrolledIn>();
+        }
+    
         public int SectionId { get; set; }
         public string Name { get; set; }
         public Nullable<int> Units { get; set; }
@@ -26,5 +32,7 @@ namespace QFGreenBean.Models
         public Nullable<int> CourseId { get; set; }
     
         public virtual Course Course { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IsEnrolledIn> IsEnrolledIns { get; set; }
     }
 }

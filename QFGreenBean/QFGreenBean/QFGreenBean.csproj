@@ -208,6 +208,9 @@
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IsEnrolledIn.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PlannerDbModel.Context.cs">
       <AutoGen>True</AutoGen>
