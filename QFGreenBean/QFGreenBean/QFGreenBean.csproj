@@ -182,6 +182,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountUser.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
@@ -204,11 +207,20 @@
     <Compile Include="Models\Department.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DepartmentAvdisor.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DepartmentDirector.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Feedback.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IsEnrolledIn.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IsEnrollingIn.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
@@ -227,10 +239,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PlannerDbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProgramOption.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SchoolUser.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Section.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StudentConstraint.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentRecord.cs">
@@ -317,11 +338,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Student\Create.cshtml" />
-    <Content Include="Views\Student\Delete.cshtml" />
-    <Content Include="Views\Student\Details.cshtml" />
-    <Content Include="Views\Student\Edit.cshtml" />
-    <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Feedback\Create.cshtml" />
     <Content Include="Views\Feedback\Delete.cshtml" />
     <Content Include="Views\Feedback\Details.cshtml" />
@@ -338,6 +354,11 @@
     <Content Include="Views\Section\Details.cshtml" />
     <Content Include="Views\Section\Edit.cshtml" />
     <Content Include="Views\Section\Index.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\Delete.cshtml" />
+    <Content Include="Views\Student\Details.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,13 +18,16 @@ namespace QFGreenBean.Models
         public StudentRecord()
         {
             this.IsEnrolledIns = new HashSet<IsEnrolledIn>();
+            this.IsEnrollingIns = new HashSet<IsEnrollingIn>();
         }
     
         public Nullable<int> StudentId { get; set; }
         public int StudentRecordId { get; set; }
     
-        public virtual Student Student { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IsEnrolledIn> IsEnrolledIns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IsEnrollingIn> IsEnrollingIns { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

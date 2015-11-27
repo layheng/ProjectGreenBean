@@ -32,11 +32,5 @@ namespace QFGreenBean.Models
         public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Section> Sections { get; set; }
-
-        public int DeleteCourse(int courseID)
-        {
-            // TO DO
-            return 1;
-        }
     }
 }

@@ -18,6 +18,7 @@ namespace QFGreenBean.Models
         public Section()
         {
             this.IsEnrolledIns = new HashSet<IsEnrolledIn>();
+            this.IsEnrollingIns = new HashSet<IsEnrollingIn>();
         }
     
         public int SectionId { get; set; }
@@ -34,5 +35,7 @@ namespace QFGreenBean.Models
         public virtual Course Course { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IsEnrolledIn> IsEnrolledIns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IsEnrollingIn> IsEnrollingIns { get; set; }
     }
 }
