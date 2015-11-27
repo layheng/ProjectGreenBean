@@ -14,6 +14,12 @@ namespace QFGreenBean.Models
     
     public partial class Course
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Course()
+        {
+            this.Sections = new HashSet<Section>();
+        }
+    
         public int CourseId { get; set; }
         public string Code { get; set; }
         public string Number { get; set; }
@@ -24,7 +30,8 @@ namespace QFGreenBean.Models
         public int DepartmentId { get; set; }
     
         public virtual Department Department { get; set; }
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Section> Sections { get; set; }
 
         public int DeleteCourse(int courseID)
         {
