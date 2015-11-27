@@ -14,6 +14,12 @@ namespace QFGreenBean.Models
     
     public partial class Student
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Student()
+        {
+            this.StudentRecords = new HashSet<StudentRecord>();
+        }
+    
         public int StudentId { get; set; }
         public string StudentNumber { get; set; }
         public string FirstName { get; set; }
@@ -21,7 +27,9 @@ namespace QFGreenBean.Models
         public string Telephone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentRecord> StudentRecords { get; set; }
 
         public bool IsStudentEnrolled(int studentId)
         {
@@ -29,5 +37,6 @@ namespace QFGreenBean.Models
             // TO DO
             return true;
         }
+
     }
 }
