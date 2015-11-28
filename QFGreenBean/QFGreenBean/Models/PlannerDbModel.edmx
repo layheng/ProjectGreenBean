@@ -87,9 +87,8 @@
           <Property Name="CourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
-          <Property Name="Term" Type="varchar" MaxLength="5" />
           <Property Name="Prerequisite" Type="varchar" MaxLength="50" />
-          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Department">
@@ -183,6 +182,7 @@
           <Property Name="EndTime" Type="time" Precision="7" />
           <Property Name="Room" Type="varchar" MaxLength="20" />
           <Property Name="Instructor" Type="varchar" MaxLength="50" />
+          <Property Name="Term" Type="varchar" MaxLength="20" />
           <Property Name="StartDate" Type="date" />
           <Property Name="EndDate" Type="date" />
           <Property Name="Status" Type="varchar" MaxLength="20" />
@@ -724,11 +724,11 @@
             <End Role="StudentSchedule" EntitySet="StudentSchedules" />
           </AssociationSet>
           <EntitySet Name="Courses" EntityType="PlannerDbModel.Course" />
+          <EntitySet Name="Sections" EntityType="PlannerDbModel.Section" />
           <AssociationSet Name="FK_Course_Department" Association="PlannerDbModel.FK_Course_Department">
             <End Role="Department" EntitySet="Departments" />
             <End Role="Course" EntitySet="Courses" />
           </AssociationSet>
-          <EntitySet Name="Sections" EntityType="PlannerDbModel.Section" />
           <AssociationSet Name="FK_Section_Course" Association="PlannerDbModel.FK_Section_Course">
             <End Role="Course" EntitySet="Courses" />
             <End Role="Section" EntitySet="Sections" />
@@ -1022,12 +1022,33 @@
           <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Term" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Prerequisite" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="PlannerDbModel.FK_Course_Department" FromRole="Course" ToRole="Department" />
           <NavigationProperty Name="Sections" Relationship="PlannerDbModel.FK_Section_Course" FromRole="Course" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="SectionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Units" Type="Int32" />
+          <Property Name="Day" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="Room" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Instructor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Term" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CourseId" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="PlannerDbModel.FK_Section_Course" FromRole="Section" ToRole="Course" />
+          <NavigationProperty Name="IsEnrolledIns" Relationship="PlannerDbModel.FK_IsEnrolledIn_Section" FromRole="Section" ToRole="IsEnrolledIn" />
+          <NavigationProperty Name="IsEnrollingIns" Relationship="PlannerDbModel.FK_IsEnrollingIn_Section" FromRole="Section" ToRole="IsEnrollingIn" />
+          <NavigationProperty Name="IsScheduledIns" Relationship="PlannerDbModel.FK_IsScheduledIn_Section" FromRole="Section" ToRole="IsScheduledIn" />
         </EntityType>
         <Association Name="FK_Course_Department">
           <End Type="PlannerDbModel.Department" Role="Department" Multiplicity="1" />
@@ -1041,27 +1062,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Section">
-          <Key>
-            <PropertyRef Name="SectionId" />
-          </Key>
-          <Property Name="SectionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Units" Type="Int32" />
-          <Property Name="Day" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="StartTime" Type="Time" Precision="7" />
-          <Property Name="EndTime" Type="Time" Precision="7" />
-          <Property Name="Room" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Instructor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CourseId" Type="Int32" />
-          <NavigationProperty Name="Course" Relationship="PlannerDbModel.FK_Section_Course" FromRole="Section" ToRole="Course" />
-          <NavigationProperty Name="IsEnrolledIns" Relationship="PlannerDbModel.FK_IsEnrolledIn_Section" FromRole="Section" ToRole="IsEnrolledIn" />
-          <NavigationProperty Name="IsEnrollingIns" Relationship="PlannerDbModel.FK_IsEnrollingIn_Section" FromRole="Section" ToRole="IsEnrollingIn" />
-          <NavigationProperty Name="IsScheduledIns" Relationship="PlannerDbModel.FK_IsScheduledIn_Section" FromRole="Section" ToRole="IsScheduledIn" />
-        </EntityType>
         <Association Name="FK_Section_Course">
           <End Type="PlannerDbModel.Course" Role="Course" Multiplicity="0..1" />
           <End Type="PlannerDbModel.Section" Role="Section" Multiplicity="*" />
@@ -1324,7 +1324,6 @@
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Prerequisite" ColumnName="Prerequisite" />
-                <ScalarProperty Name="Term" ColumnName="Term" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
@@ -1338,6 +1337,7 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
                 <ScalarProperty Name="Instructor" ColumnName="Instructor" />
                 <ScalarProperty Name="Room" ColumnName="Room" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />

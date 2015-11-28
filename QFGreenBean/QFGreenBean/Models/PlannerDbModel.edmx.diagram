@@ -35,12 +35,12 @@
         <EntityTypeShape EntityType="PlannerDbModel.StudentRecord" Width="1.5" PointX="10" PointY="6.25" />
         <EntityTypeShape EntityType="PlannerDbModel.IsEnrolledIn" Width="1.5" PointX="11.875" PointY="8.25" />
         <AssociationConnector Association="PlannerDbModel.FK_IsEnrolledIn_StudentRecord" />
-        <EntityTypeShape EntityType="PlannerDbModel.AccountUser" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="PlannerDbModel.AccountUser" Width="1.5" PointX="0.5" PointY="9.875" />
         <EntityTypeShape EntityType="PlannerDbModel.DepartmentAvdisor" Width="1.5" PointX="7.75" PointY="16.25" />
         <EntityTypeShape EntityType="PlannerDbModel.DepartmentDirector" Width="1.5" PointX="7.75" PointY="13.75" />
         <EntityTypeShape EntityType="PlannerDbModel.IsEnrollingIn" Width="1.5" PointX="12.25" PointY="5.375" />
-        <EntityTypeShape EntityType="PlannerDbModel.ProgramOption" Width="1.5" PointX="4.125" PointY="16.625" />
-        <EntityTypeShape EntityType="PlannerDbModel.SchoolUser" Width="1.5" PointX="5.5" PointY="11.625" />
+        <EntityTypeShape EntityType="PlannerDbModel.ProgramOption" Width="1.5" PointX="0.5" PointY="14.5" />
+        <EntityTypeShape EntityType="PlannerDbModel.SchoolUser" Width="1.5" PointX="4.375" PointY="9.375" />
         <EntityTypeShape EntityType="PlannerDbModel.StudentConstraint" Width="1.5" PointX="10" PointY="3.25" />
         <AssociationConnector Association="PlannerDbModel.FK_ProgramOption_Department" />
         <AssociationConnector Association="PlannerDbModel.FK_DepartmentAvdisor_SchoolUser" />
@@ -54,9 +54,9 @@
         <EntityTypeShape EntityType="PlannerDbModel.StudentSchedule" Width="1.5" PointX="10" PointY="19.5" />
         <AssociationConnector Association="PlannerDbModel.FK_IsScheduledIn_StudentSchedule" />
         <AssociationConnector Association="PlannerDbModel.FK_StudentSchedule_Student" />
-        <EntityTypeShape EntityType="PlannerDbModel.Course" Width="1.5" PointX="3.875" PointY="6.875" />
+        <EntityTypeShape EntityType="PlannerDbModel.Course" Width="1.5" PointX="2.25" PointY="18.125" />
+        <EntityTypeShape EntityType="PlannerDbModel.Section" Width="1.5" PointX="4.25" PointY="18.75" />
         <AssociationConnector Association="PlannerDbModel.FK_Course_Department" />
-        <EntityTypeShape EntityType="PlannerDbModel.Section" Width="1.5" PointX="5" PointY="23" />
         <AssociationConnector Association="PlannerDbModel.FK_Section_Course" />
         <AssociationConnector Association="PlannerDbModel.FK_IsEnrolledIn_Section" />
         <AssociationConnector Association="PlannerDbModel.FK_IsEnrollingIn_Section" />

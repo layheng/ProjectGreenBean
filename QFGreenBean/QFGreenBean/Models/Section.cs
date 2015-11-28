@@ -30,6 +30,7 @@ namespace QFGreenBean.Models
         public Nullable<System.TimeSpan> EndTime { get; set; }
         public string Room { get; set; }
         public string Instructor { get; set; }
+        public string Term { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public string Status { get; set; }
