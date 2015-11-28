@@ -15,9 +15,6 @@
             @Html.DisplayNameFor(model => model.Code)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Number)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
@@ -29,11 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <!--
         <th>
             @Html.DisplayNameFor(model => model.Department.Name)
         </th>
-            -->
         <th></th>
     </tr>
 
@@ -41,9 +36,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -57,11 +49,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <!--
         <td>
             @Html.DisplayFor(modelItem => item.Department.Name)
         </td>
-            -->
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CourseId }) |
             @Html.ActionLink("Details", "Details", new { id=item.CourseId }) |

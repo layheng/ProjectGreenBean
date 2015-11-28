@@ -19,6 +19,7 @@ namespace QFGreenBean.Models
         {
             this.IsEnrolledIns = new HashSet<IsEnrolledIn>();
             this.IsEnrollingIns = new HashSet<IsEnrollingIn>();
+            this.IsScheduledIns = new HashSet<IsScheduledIn>();
         }
     
         public int SectionId { get; set; }
@@ -29,6 +30,8 @@ namespace QFGreenBean.Models
         public Nullable<System.TimeSpan> EndTime { get; set; }
         public string Room { get; set; }
         public string Instructor { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
         public string Status { get; set; }
         public Nullable<int> CourseId { get; set; }
     
@@ -37,5 +40,7 @@ namespace QFGreenBean.Models
         public virtual ICollection<IsEnrolledIn> IsEnrolledIns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IsEnrollingIn> IsEnrollingIns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IsScheduledIn> IsScheduledIns { get; set; }
     }
 }
