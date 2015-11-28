@@ -23,7 +23,9 @@ namespace QFGreenBean.Models
         public int CourseId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
-        public string Prerequisite { get; set; }
+        public string Prerequisite1 { get; set; }
+        public string Prerequisite2 { get; set; }
+        public string ConcurrentPrerequisite { get; set; }
         public string Description { get; set; }
         public int DepartmentId { get; set; }
     

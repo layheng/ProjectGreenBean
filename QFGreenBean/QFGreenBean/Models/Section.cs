@@ -24,7 +24,7 @@ namespace QFGreenBean.Models
     
         public int SectionId { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Units { get; set; }
+        public Nullable<float> Units { get; set; }
         public string Day { get; set; }
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }

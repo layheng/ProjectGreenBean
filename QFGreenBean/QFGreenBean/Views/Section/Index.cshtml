@@ -12,7 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            Course             
+            Course            
+        </th>
+        <th>
+            Course Name
         </th>
         <th>
             Section Name
@@ -59,6 +62,12 @@
             {
                 @Html.DisplayFor(modelItem => item.Course.Code)
             }           
+        </td>
+        <td>
+            @if (ViewBag.PreviousCourseCode != item.Course.Code)
+            {
+                @Html.DisplayFor(modelItem => item.Course.Name)
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)

@@ -87,7 +87,9 @@
           <Property Name="CourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
-          <Property Name="Prerequisite" Type="varchar" MaxLength="50" />
+          <Property Name="Prerequisite1" Type="varchar" MaxLength="50" />
+          <Property Name="Prerequisite2" Type="varchar" MaxLength="50" />
+          <Property Name="ConcurrentPrerequisite" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="1000" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
         </EntityType>
@@ -176,7 +178,7 @@
           </Key>
           <Property Name="SectionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Units" Type="int" />
+          <Property Name="Units" Type="real" />
           <Property Name="Day" Type="varchar" MaxLength="20" />
           <Property Name="StartTime" Type="time" Precision="7" />
           <Property Name="EndTime" Type="time" Precision="7" />
@@ -724,11 +726,11 @@
             <End Role="StudentSchedule" EntitySet="StudentSchedules" />
           </AssociationSet>
           <EntitySet Name="Courses" EntityType="PlannerDbModel.Course" />
-          <EntitySet Name="Sections" EntityType="PlannerDbModel.Section" />
           <AssociationSet Name="FK_Course_Department" Association="PlannerDbModel.FK_Course_Department">
             <End Role="Department" EntitySet="Departments" />
             <End Role="Course" EntitySet="Courses" />
           </AssociationSet>
+          <EntitySet Name="Sections" EntityType="PlannerDbModel.Section" />
           <AssociationSet Name="FK_Section_Course" Association="PlannerDbModel.FK_Section_Course">
             <End Role="Course" EntitySet="Courses" />
             <End Role="Section" EntitySet="Sections" />
@@ -1022,19 +1024,33 @@
           <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Prerequisite" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prerequisite1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prerequisite2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConcurrentPrerequisite" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="PlannerDbModel.FK_Course_Department" FromRole="Course" ToRole="Department" />
           <NavigationProperty Name="Sections" Relationship="PlannerDbModel.FK_Section_Course" FromRole="Course" ToRole="Section" />
         </EntityType>
+        <Association Name="FK_Course_Department">
+          <End Type="PlannerDbModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="PlannerDbModel.Course" Role="Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Section">
           <Key>
             <PropertyRef Name="SectionId" />
           </Key>
           <Property Name="SectionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Units" Type="Int32" />
+          <Property Name="Units" Type="Single" />
           <Property Name="Day" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="StartTime" Type="Time" Precision="7" />
           <Property Name="EndTime" Type="Time" Precision="7" />
@@ -1050,18 +1066,6 @@
           <NavigationProperty Name="IsEnrollingIns" Relationship="PlannerDbModel.FK_IsEnrollingIn_Section" FromRole="Section" ToRole="IsEnrollingIn" />
           <NavigationProperty Name="IsScheduledIns" Relationship="PlannerDbModel.FK_IsScheduledIn_Section" FromRole="Section" ToRole="IsScheduledIn" />
         </EntityType>
-        <Association Name="FK_Course_Department">
-          <End Type="PlannerDbModel.Department" Role="Department" Multiplicity="1" />
-          <End Type="PlannerDbModel.Course" Role="Course" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="DepartmentId" />
-            </Principal>
-            <Dependent Role="Course">
-              <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Section_Course">
           <End Type="PlannerDbModel.Course" Role="Course" Multiplicity="0..1" />
           <End Type="PlannerDbModel.Section" Role="Section" Multiplicity="*" />
@@ -1323,7 +1327,9 @@
               <MappingFragment StoreEntitySet="Course">
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Prerequisite" ColumnName="Prerequisite" />
+                <ScalarProperty Name="ConcurrentPrerequisite" ColumnName="ConcurrentPrerequisite" />
+                <ScalarProperty Name="Prerequisite2" ColumnName="Prerequisite2" />
+                <ScalarProperty Name="Prerequisite1" ColumnName="Prerequisite1" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
