@@ -19,6 +19,7 @@ namespace QFGreenBean.Models
         {
             this.StudentConstraints = new HashSet<StudentConstraint>();
             this.StudentRecords = new HashSet<StudentRecord>();
+            this.StudentSchedules = new HashSet<StudentSchedule>();
         }
     
         public int StudentId { get; set; }
@@ -30,5 +31,7 @@ namespace QFGreenBean.Models
         public virtual ICollection<StudentConstraint> StudentConstraints { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentRecord> StudentRecords { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentSchedule> StudentSchedules { get; set; }
     }
 }
