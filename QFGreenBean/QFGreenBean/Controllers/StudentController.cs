@@ -17,8 +17,7 @@ namespace QFGreenBean.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            var students = db.Students.Include(s => s.SchoolUser);
-            return View(students.ToList());
+            return View(db.Students.ToList());
         }
 
         // GET: Student/Details/5
@@ -39,7 +38,6 @@ namespace QFGreenBean.Controllers
         // GET: Student/Create
         public ActionResult Create()
         {
-            ViewBag.SchoolUserId = new SelectList(db.SchoolUsers, "SchoolUserId", "Name");
             return View();
         }
 
@@ -48,7 +46,7 @@ namespace QFGreenBean.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentId,StudentNumber,SchoolUserId")] Student student)
+        public ActionResult Create([Bind(Include = "StudentId,StudentNumber,UserName,Password,FirstName,LastName,Telephone,Email,UserType")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +55,6 @@ namespace QFGreenBean.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SchoolUserId = new SelectList(db.SchoolUsers, "SchoolUserId", "Name", student.SchoolUserId);
             return View(student);
         }
 
@@ -73,7 +70,6 @@ namespace QFGreenBean.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.SchoolUserId = new SelectList(db.SchoolUsers, "SchoolUserId", "Name", student.SchoolUserId);
             return View(student);
         }
 
@@ -82,7 +78,7 @@ namespace QFGreenBean.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentId,StudentNumber,SchoolUserId")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentId,StudentNumber,UserName,Password,FirstName,LastName,Telephone,Email,UserType")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +86,6 @@ namespace QFGreenBean.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.SchoolUserId = new SelectList(db.SchoolUsers, "SchoolUserId", "Name", student.SchoolUserId);
             return View(student);
         }
 

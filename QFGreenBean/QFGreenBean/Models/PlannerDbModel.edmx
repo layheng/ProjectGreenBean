@@ -106,7 +106,13 @@
           </Key>
           <Property Name="DepartmentAvdisorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeNumber" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="SchoolUserId" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="UserType" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DepartmentDirector">
           <Key>
@@ -114,7 +120,13 @@
           </Key>
           <Property Name="DepartmentDirectorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeNumber" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="SchoolUserId" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="UserType" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -196,7 +208,13 @@
           </Key>
           <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentNumber" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="SchoolUserId" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="UserType" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="StudentConstraint">
           <Key>
@@ -287,30 +305,6 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DepartmentAvdisor_SchoolUser">
-          <End Role="SchoolUser" Type="Self.SchoolUser" Multiplicity="0..1" />
-          <End Role="DepartmentAvdisor" Type="Self.DepartmentAvdisor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SchoolUser">
-              <PropertyRef Name="SchoolUserId" />
-            </Principal>
-            <Dependent Role="DepartmentAvdisor">
-              <PropertyRef Name="SchoolUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DepartmentDirector_SchoolUser">
-          <End Role="SchoolUser" Type="Self.SchoolUser" Multiplicity="0..1" />
-          <End Role="DepartmentDirector" Type="Self.DepartmentDirector" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SchoolUser">
-              <PropertyRef Name="SchoolUserId" />
-            </Principal>
-            <Dependent Role="DepartmentDirector">
-              <PropertyRef Name="SchoolUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -410,18 +404,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Student_SchoolUser">
-          <End Role="SchoolUser" Type="Self.SchoolUser" Multiplicity="0..1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SchoolUser">
-              <PropertyRef Name="SchoolUserId" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="SchoolUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StudentConstraint_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
           <End Role="StudentConstraint" Type="Self.StudentConstraint" Multiplicity="*" />
@@ -501,14 +483,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_DepartmentAvdisor_SchoolUser" Association="Self.FK_DepartmentAvdisor_SchoolUser">
-            <End Role="SchoolUser" EntitySet="SchoolUser" />
-            <End Role="DepartmentAvdisor" EntitySet="DepartmentAvdisor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DepartmentDirector_SchoolUser" Association="Self.FK_DepartmentDirector_SchoolUser">
-            <End Role="SchoolUser" EntitySet="SchoolUser" />
-            <End Role="DepartmentDirector" EntitySet="DepartmentDirector" />
-          </AssociationSet>
           <AssociationSet Name="FK_IsEnrolledIn_Section" Association="Self.FK_IsEnrolledIn_Section">
             <End Role="Section" EntitySet="Section" />
             <End Role="IsEnrolledIn" EntitySet="IsEnrolledIn" />
@@ -540,10 +514,6 @@
           <AssociationSet Name="FK_Section_Course" Association="Self.FK_Section_Course">
             <End Role="Course" EntitySet="Course" />
             <End Role="Section" EntitySet="Section" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_SchoolUser" Association="Self.FK_Student_SchoolUser">
-            <End Role="SchoolUser" EntitySet="SchoolUser" />
-            <End Role="Student" EntitySet="Student" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentConstraint_Student" Association="Self.FK_StudentConstraint_Student">
             <End Role="Student" EntitySet="Student" />
@@ -680,8 +650,6 @@
             <End Role="IsEnrolledIn" EntitySet="IsEnrolledIns" />
           </AssociationSet>
           <EntitySet Name="AccountUsers" EntityType="PlannerDbModel.AccountUser" />
-          <EntitySet Name="DepartmentAvdisors" EntityType="PlannerDbModel.DepartmentAvdisor" />
-          <EntitySet Name="DepartmentDirectors" EntityType="PlannerDbModel.DepartmentDirector" />
           <EntitySet Name="IsEnrollingIns" EntityType="PlannerDbModel.IsEnrollingIn" />
           <EntitySet Name="ProgramOptions" EntityType="PlannerDbModel.ProgramOption" />
           <EntitySet Name="SchoolUsers" EntityType="PlannerDbModel.SchoolUser" />
@@ -690,40 +658,15 @@
             <End Role="Department" EntitySet="Departments" />
             <End Role="ProgramOption" EntitySet="ProgramOptions" />
           </AssociationSet>
-          <AssociationSet Name="FK_DepartmentAvdisor_SchoolUser" Association="PlannerDbModel.FK_DepartmentAvdisor_SchoolUser">
-            <End Role="SchoolUser" EntitySet="SchoolUsers" />
-            <End Role="DepartmentAvdisor" EntitySet="DepartmentAvdisors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DepartmentDirector_SchoolUser" Association="PlannerDbModel.FK_DepartmentDirector_SchoolUser">
-            <End Role="SchoolUser" EntitySet="SchoolUsers" />
-            <End Role="DepartmentDirector" EntitySet="DepartmentDirectors" />
-          </AssociationSet>
           <AssociationSet Name="FK_IsEnrollingIn_StudentRecord" Association="PlannerDbModel.FK_IsEnrollingIn_StudentRecord">
             <End Role="StudentRecord" EntitySet="StudentRecords" />
             <End Role="IsEnrollingIn" EntitySet="IsEnrollingIns" />
-          </AssociationSet>
-          <EntitySet Name="Students" EntityType="PlannerDbModel.Student" />
-          <AssociationSet Name="FK_Student_SchoolUser" Association="PlannerDbModel.FK_Student_SchoolUser">
-            <End Role="SchoolUser" EntitySet="SchoolUsers" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentConstraint_Student" Association="PlannerDbModel.FK_StudentConstraint_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="StudentConstraint" EntitySet="StudentConstraints" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentRecord_Student" Association="PlannerDbModel.FK_StudentRecord_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="StudentRecord" EntitySet="StudentRecords" />
           </AssociationSet>
           <EntitySet Name="IsScheduledIns" EntityType="PlannerDbModel.IsScheduledIn" />
           <EntitySet Name="StudentSchedules" EntityType="PlannerDbModel.StudentSchedule" />
           <AssociationSet Name="FK_IsScheduledIn_StudentSchedule" Association="PlannerDbModel.FK_IsScheduledIn_StudentSchedule">
             <End Role="StudentSchedule" EntitySet="StudentSchedules" />
             <End Role="IsScheduledIn" EntitySet="IsScheduledIns" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentSchedule_Student" Association="PlannerDbModel.FK_StudentSchedule_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="StudentSchedule" EntitySet="StudentSchedules" />
           </AssociationSet>
           <EntitySet Name="Courses" EntityType="PlannerDbModel.Course" />
           <AssociationSet Name="FK_Course_Department" Association="PlannerDbModel.FK_Course_Department">
@@ -746,6 +689,21 @@
           <AssociationSet Name="FK_IsScheduledIn_Section" Association="PlannerDbModel.FK_IsScheduledIn_Section">
             <End Role="Section" EntitySet="Sections" />
             <End Role="IsScheduledIn" EntitySet="IsScheduledIns" />
+          </AssociationSet>
+          <EntitySet Name="DepartmentAvdisors" EntityType="PlannerDbModel.DepartmentAvdisor" />
+          <EntitySet Name="DepartmentDirectors" EntityType="PlannerDbModel.DepartmentDirector" />
+          <EntitySet Name="Students" EntityType="PlannerDbModel.Student" />
+          <AssociationSet Name="FK_StudentConstraint_Student" Association="PlannerDbModel.FK_StudentConstraint_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentConstraint" EntitySet="StudentConstraints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentRecord_Student" Association="PlannerDbModel.FK_StudentRecord_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentRecord" EntitySet="StudentRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentSchedule_Student" Association="PlannerDbModel.FK_StudentSchedule_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentSchedule" EntitySet="StudentSchedules" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Feedback">
@@ -813,24 +771,6 @@
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="DepartmentAvdisor">
-          <Key>
-            <PropertyRef Name="DepartmentAvdisorId" />
-          </Key>
-          <Property Name="DepartmentAvdisorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="SchoolUserId" Type="Int32" />
-          <NavigationProperty Name="SchoolUser" Relationship="PlannerDbModel.FK_DepartmentAvdisor_SchoolUser" FromRole="DepartmentAvdisor" ToRole="SchoolUser" />
-        </EntityType>
-        <EntityType Name="DepartmentDirector">
-          <Key>
-            <PropertyRef Name="DepartmentDirectorId" />
-          </Key>
-          <Property Name="DepartmentDirectorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="SchoolUserId" Type="Int32" />
-          <NavigationProperty Name="SchoolUser" Relationship="PlannerDbModel.FK_DepartmentDirector_SchoolUser" FromRole="DepartmentDirector" ToRole="SchoolUser" />
-        </EntityType>
         <EntityType Name="IsEnrollingIn">
           <Key>
             <PropertyRef Name="IsEnrollingInId" />
@@ -863,9 +803,6 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DepartmentAvdisors" Relationship="PlannerDbModel.FK_DepartmentAvdisor_SchoolUser" FromRole="SchoolUser" ToRole="DepartmentAvdisor" />
-          <NavigationProperty Name="DepartmentDirectors" Relationship="PlannerDbModel.FK_DepartmentDirector_SchoolUser" FromRole="SchoolUser" ToRole="DepartmentDirector" />
-          <NavigationProperty Name="Students" Relationship="PlannerDbModel.FK_Student_SchoolUser" FromRole="SchoolUser" ToRole="Student" />
         </EntityType>
         <EntityType Name="StudentConstraint">
           <Key>
@@ -890,30 +827,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DepartmentAvdisor_SchoolUser">
-          <End Type="PlannerDbModel.SchoolUser" Role="SchoolUser" Multiplicity="0..1" />
-          <End Type="PlannerDbModel.DepartmentAvdisor" Role="DepartmentAvdisor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SchoolUser">
-              <PropertyRef Name="SchoolUserId" />
-            </Principal>
-            <Dependent Role="DepartmentAvdisor">
-              <PropertyRef Name="SchoolUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DepartmentDirector_SchoolUser">
-          <End Type="PlannerDbModel.SchoolUser" Role="SchoolUser" Multiplicity="0..1" />
-          <End Type="PlannerDbModel.DepartmentDirector" Role="DepartmentDirector" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SchoolUser">
-              <PropertyRef Name="SchoolUserId" />
-            </Principal>
-            <Dependent Role="DepartmentDirector">
-              <PropertyRef Name="SchoolUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_IsEnrollingIn_StudentRecord">
           <End Type="PlannerDbModel.StudentRecord" Role="StudentRecord" Multiplicity="0..1" />
           <End Type="PlannerDbModel.IsEnrollingIn" Role="IsEnrollingIn" Multiplicity="*" />
@@ -923,54 +836,6 @@
             </Principal>
             <Dependent Role="IsEnrollingIn">
               <PropertyRef Name="StudentRecordId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StudentNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="SchoolUserId" Type="Int32" />
-          <NavigationProperty Name="SchoolUser" Relationship="PlannerDbModel.FK_Student_SchoolUser" FromRole="Student" ToRole="SchoolUser" />
-          <NavigationProperty Name="StudentConstraints" Relationship="PlannerDbModel.FK_StudentConstraint_Student" FromRole="Student" ToRole="StudentConstraint" />
-          <NavigationProperty Name="StudentRecords" Relationship="PlannerDbModel.FK_StudentRecord_Student" FromRole="Student" ToRole="StudentRecord" />
-          <NavigationProperty Name="StudentSchedules" Relationship="PlannerDbModel.FK_StudentSchedule_Student" FromRole="Student" ToRole="StudentSchedule" />
-        </EntityType>
-        <Association Name="FK_Student_SchoolUser">
-          <End Type="PlannerDbModel.SchoolUser" Role="SchoolUser" Multiplicity="0..1" />
-          <End Type="PlannerDbModel.Student" Role="Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SchoolUser">
-              <PropertyRef Name="SchoolUserId" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="SchoolUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentConstraint_Student">
-          <End Type="PlannerDbModel.Student" Role="Student" Multiplicity="0..1" />
-          <End Type="PlannerDbModel.StudentConstraint" Role="StudentConstraint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentId" />
-            </Principal>
-            <Dependent Role="StudentConstraint">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentRecord_Student">
-          <End Type="PlannerDbModel.Student" Role="Student" Multiplicity="0..1" />
-          <End Type="PlannerDbModel.StudentRecord" Role="StudentRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentId" />
-            </Principal>
-            <Dependent Role="StudentRecord">
-              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1002,18 +867,6 @@
             </Principal>
             <Dependent Role="IsScheduledIn">
               <PropertyRef Name="StudentScheduleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentSchedule_Student">
-          <End Type="PlannerDbModel.Student" Role="Student" Multiplicity="0..1" />
-          <End Type="PlannerDbModel.StudentSchedule" Role="StudentSchedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentId" />
-            </Principal>
-            <Dependent Role="StudentSchedule">
-              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1111,6 +964,87 @@
             </Principal>
             <Dependent Role="IsScheduledIn">
               <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepartmentAvdisor">
+          <Key>
+            <PropertyRef Name="DepartmentAvdisorId" />
+          </Key>
+          <Property Name="DepartmentAvdisorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DepartmentDirector">
+          <Key>
+            <PropertyRef Name="DepartmentDirectorId" />
+          </Key>
+          <Property Name="DepartmentDirectorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StudentConstraints" Relationship="PlannerDbModel.FK_StudentConstraint_Student" FromRole="Student" ToRole="StudentConstraint" />
+          <NavigationProperty Name="StudentRecords" Relationship="PlannerDbModel.FK_StudentRecord_Student" FromRole="Student" ToRole="StudentRecord" />
+          <NavigationProperty Name="StudentSchedules" Relationship="PlannerDbModel.FK_StudentSchedule_Student" FromRole="Student" ToRole="StudentSchedule" />
+        </EntityType>
+        <Association Name="FK_StudentConstraint_Student">
+          <End Type="PlannerDbModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="PlannerDbModel.StudentConstraint" Role="StudentConstraint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentConstraint">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentRecord_Student">
+          <End Type="PlannerDbModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="PlannerDbModel.StudentRecord" Role="StudentRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentRecord">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentSchedule_Student">
+          <End Type="PlannerDbModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="PlannerDbModel.StudentSchedule" Role="StudentSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentSchedule">
+              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1234,24 +1168,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DepartmentAvdisors">
-            <EntityTypeMapping TypeName="PlannerDbModel.DepartmentAvdisor">
-              <MappingFragment StoreEntitySet="DepartmentAvdisor">
-                <ScalarProperty Name="SchoolUserId" ColumnName="SchoolUserId" />
-                <ScalarProperty Name="EmployeeNumber" ColumnName="EmployeeNumber" />
-                <ScalarProperty Name="DepartmentAvdisorId" ColumnName="DepartmentAvdisorId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DepartmentDirectors">
-            <EntityTypeMapping TypeName="PlannerDbModel.DepartmentDirector">
-              <MappingFragment StoreEntitySet="DepartmentDirector">
-                <ScalarProperty Name="SchoolUserId" ColumnName="SchoolUserId" />
-                <ScalarProperty Name="EmployeeNumber" ColumnName="EmployeeNumber" />
-                <ScalarProperty Name="DepartmentDirectorId" ColumnName="DepartmentDirectorId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="IsEnrollingIns">
             <EntityTypeMapping TypeName="PlannerDbModel.IsEnrollingIn">
               <MappingFragment StoreEntitySet="IsEnrollingIn">
@@ -1293,15 +1209,6 @@
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
                 <ScalarProperty Name="StudentConstraintId" ColumnName="StudentConstraintId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="PlannerDbModel.Student">
-              <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="SchoolUserId" ColumnName="SchoolUserId" />
-                <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1352,6 +1259,51 @@
                 <ScalarProperty Name="Units" ColumnName="Units" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentAvdisors">
+            <EntityTypeMapping TypeName="PlannerDbModel.DepartmentAvdisor">
+              <MappingFragment StoreEntitySet="DepartmentAvdisor">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="EmployeeNumber" ColumnName="EmployeeNumber" />
+                <ScalarProperty Name="DepartmentAvdisorId" ColumnName="DepartmentAvdisorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentDirectors">
+            <EntityTypeMapping TypeName="PlannerDbModel.DepartmentDirector">
+              <MappingFragment StoreEntitySet="DepartmentDirector">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="EmployeeNumber" ColumnName="EmployeeNumber" />
+                <ScalarProperty Name="DepartmentDirectorId" ColumnName="DepartmentDirectorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="PlannerDbModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

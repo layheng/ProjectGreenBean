@@ -24,9 +24,14 @@ namespace QFGreenBean.Models
     
         public int StudentId { get; set; }
         public string StudentNumber { get; set; }
-        public Nullable<int> SchoolUserId { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Telephone { get; set; }
+        public string Email { get; set; }
+        public string UserType { get; set; }
     
-        public virtual SchoolUser SchoolUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentConstraint> StudentConstraints { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

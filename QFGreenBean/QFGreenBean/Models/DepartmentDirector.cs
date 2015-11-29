@@ -16,8 +16,12 @@ namespace QFGreenBean.Models
     {
         public int DepartmentDirectorId { get; set; }
         public string EmployeeNumber { get; set; }
-        public Nullable<int> SchoolUserId { get; set; }
-    
-        public virtual SchoolUser SchoolUser { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Telephone { get; set; }
+        public string Email { get; set; }
+        public string UserType { get; set; }
     }
 }

@@ -35,16 +35,16 @@ namespace QFGreenBean.Models
         public virtual DbSet<StudentRecord> StudentRecords { get; set; }
         public virtual DbSet<IsEnrolledIn> IsEnrolledIns { get; set; }
         public virtual DbSet<AccountUser> AccountUsers { get; set; }
-        public virtual DbSet<DepartmentAvdisor> DepartmentAvdisors { get; set; }
-        public virtual DbSet<DepartmentDirector> DepartmentDirectors { get; set; }
         public virtual DbSet<IsEnrollingIn> IsEnrollingIns { get; set; }
         public virtual DbSet<ProgramOption> ProgramOptions { get; set; }
         public virtual DbSet<SchoolUser> SchoolUsers { get; set; }
         public virtual DbSet<StudentConstraint> StudentConstraints { get; set; }
-        public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<IsScheduledIn> IsScheduledIns { get; set; }
         public virtual DbSet<StudentSchedule> StudentSchedules { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Section> Sections { get; set; }
+        public virtual DbSet<DepartmentAvdisor> DepartmentAvdisors { get; set; }
+        public virtual DbSet<DepartmentDirector> DepartmentDirectors { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
     }
 }
