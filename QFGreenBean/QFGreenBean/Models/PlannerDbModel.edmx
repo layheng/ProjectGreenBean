@@ -128,6 +128,15 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="UserType" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="FallEvent">
+          <Key>
+            <PropertyRef Name="FallEventId" />
+          </Key>
+          <Property Name="FallEventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+        </EntityType>
         <EntityType Name="Feedback">
           <Key>
             <PropertyRef Name="FeedbackId" />
@@ -239,6 +248,24 @@
           </Key>
           <Property Name="StudentScheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentId" Type="int" />
+        </EntityType>
+        <EntityType Name="SummerEvent">
+          <Key>
+            <PropertyRef Name="SummerEventId" />
+          </Key>
+          <Property Name="SummerEventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="WinterEvent">
+          <Key>
+            <PropertyRef Name="WinterEventId" />
+          </Key>
+          <Property Name="WinterEventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
         </EntityType>
         <Association Name="FK_Course_Department">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
@@ -452,6 +479,7 @@
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepartmentAvdisor" EntityType="Self.DepartmentAvdisor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DepartmentDirector" EntityType="Self.DepartmentDirector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FallEvent" EntityType="Self.FallEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IsEnrolledIn" EntityType="Self.IsEnrolledIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IsEnrollingIn" EntityType="Self.IsEnrollingIn" Schema="dbo" store:Type="Tables" />
@@ -463,6 +491,8 @@
           <EntitySet Name="StudentConstraint" EntityType="Self.StudentConstraint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentRecord" EntityType="Self.StudentRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentSchedule" EntityType="Self.StudentSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SummerEvent" EntityType="Self.SummerEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WinterEvent" EntityType="Self.WinterEvent" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Course_Department" Association="Self.FK_Course_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="Course" EntitySet="Course" />
@@ -705,6 +735,9 @@
             <End Role="Student" EntitySet="Students" />
             <End Role="StudentSchedule" EntitySet="StudentSchedules" />
           </AssociationSet>
+          <EntitySet Name="FallEvents" EntityType="PlannerDbModel.FallEvent" />
+          <EntitySet Name="SummerEvents" EntityType="PlannerDbModel.SummerEvent" />
+          <EntitySet Name="WinterEvents" EntityType="PlannerDbModel.WinterEvent" />
         </EntityContainer>
         <EntityType Name="Feedback">
           <Key>
@@ -1048,6 +1081,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FallEvent">
+          <Key>
+            <PropertyRef Name="FallEventId" />
+          </Key>
+          <Property Name="FallEventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SummerEvent">
+          <Key>
+            <PropertyRef Name="SummerEventId" />
+          </Key>
+          <Property Name="SummerEventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WinterEvent">
+          <Key>
+            <PropertyRef Name="WinterEventId" />
+          </Key>
+          <Property Name="WinterEventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1304,6 +1364,36 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FallEvents">
+            <EntityTypeMapping TypeName="PlannerDbModel.FallEvent">
+              <MappingFragment StoreEntitySet="FallEvent">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="FallEventId" ColumnName="FallEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SummerEvents">
+            <EntityTypeMapping TypeName="PlannerDbModel.SummerEvent">
+              <MappingFragment StoreEntitySet="SummerEvent">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="SummerEventId" ColumnName="SummerEventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WinterEvents">
+            <EntityTypeMapping TypeName="PlannerDbModel.WinterEvent">
+              <MappingFragment StoreEntitySet="WinterEvent">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="WinterEventId" ColumnName="WinterEventId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

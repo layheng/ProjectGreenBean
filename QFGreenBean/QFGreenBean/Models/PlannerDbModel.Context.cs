@@ -46,5 +46,8 @@ namespace QFGreenBean.Models
         public virtual DbSet<DepartmentAvdisor> DepartmentAvdisors { get; set; }
         public virtual DbSet<DepartmentDirector> DepartmentDirectors { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<FallEvent> FallEvents { get; set; }
+        public virtual DbSet<SummerEvent> SummerEvents { get; set; }
+        public virtual DbSet<WinterEvent> WinterEvents { get; set; }
     }
 }

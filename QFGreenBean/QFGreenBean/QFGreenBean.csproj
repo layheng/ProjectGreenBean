@@ -174,11 +174,18 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\FallEventController.cs" />
+    <Compile Include="Controllers\FallScheduleCalendarController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SummerEventController.cs" />
+    <Compile Include="Controllers\SummerScheduleCalendarController.cs" />
+    <Compile Include="Controllers\WinterEventController.cs" />
+    <Compile Include="Controllers\WinterScheduleCalendarController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,6 +218,9 @@
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DepartmentDirector.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FallEvent.cs">
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Feedback.cs">
@@ -264,6 +274,12 @@
       <DependentUpon>PlannerDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentScheduleGenerator.cs" />
+    <Compile Include="Models\SummerEvent.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WinterEvent.cs">
+      <DependentUpon>PlannerDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -365,9 +381,33 @@
     <Content Include="Views\Student\Details.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Department\Create.cshtml" />
+    <Content Include="Views\Department\Delete.cshtml" />
+    <Content Include="Views\Department\Details.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\FallEvent\Create.cshtml" />
+    <Content Include="Views\FallEvent\Delete.cshtml" />
+    <Content Include="Views\FallEvent\Details.cshtml" />
+    <Content Include="Views\FallEvent\Edit.cshtml" />
+    <Content Include="Views\FallEvent\Index.cshtml" />
+    <Content Include="Views\WinterEvent\Create.cshtml" />
+    <Content Include="Views\WinterEvent\Delete.cshtml" />
+    <Content Include="Views\WinterEvent\Details.cshtml" />
+    <Content Include="Views\WinterEvent\Edit.cshtml" />
+    <Content Include="Views\WinterEvent\Index.cshtml" />
+    <Content Include="Views\SummerEvent\Create.cshtml" />
+    <Content Include="Views\SummerEvent\Delete.cshtml" />
+    <Content Include="Views\SummerEvent\Details.cshtml" />
+    <Content Include="Views\SummerEvent\Edit.cshtml" />
+    <Content Include="Views\SummerEvent\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DepartmentSchedule\" />
+    <Folder Include="Views\FallScheduleCalendar\" />
+    <Folder Include="Views\SummerScheduleCalendar\" />
+    <Folder Include="Views\WinterScheduleCalendar\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
